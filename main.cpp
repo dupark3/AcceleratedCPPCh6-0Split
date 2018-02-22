@@ -1,5 +1,8 @@
 #include <iostream>
 #include <string>
+#include <vector>
+
+#include "split.h"
 
 int main() {
     std::cout << "Enter string to split into individual words: ";
