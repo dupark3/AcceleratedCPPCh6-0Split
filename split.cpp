@@ -21,10 +21,17 @@ std::vector<std::string> split(const std::string& line){
 
     // Use two iterators and space/notspace predicate to delimit a word
     while (i != line.end()){
-        std::find_if(i, line.end(), notSpace); // i now points at the first non-space char
-        string_iter j = std::find_if(i, line.end(), space); // j now points at the next space char
+        // ignore leading spaces. i will point to first non-space char
+        i = std::find_if(i, line.end(), notSpace);
+
+        // find the next space. j will point to the first occurrence of space char after i
+        string_iter j = std::find_if(i, line.end(), space);
+
+        // now i and j should delimit the word to be stored unless we hit the end of line
         if (i != line.end())
             ret.push_back(std::string(i, j));
+
+        // move iterator i up to the end of current word
         i = j;
     }
 
